@@ -1,16 +1,13 @@
-# for py 2.7
-import mechanize
-from BeautifulSoup import BeautifulSoup
+# for py 3.4
+#import mechanize
+from bs4 import BeautifulSoup
+import requests
 
-br = mechanize.Browser()
-br.set_handle_robots(False)
-br.addheaders=[('User-agent','chrome')]
+url = "http://news.ycombinator.com"
 
-query = "http://news.ycombinator.com"
+request = requests.get(url)
 
-html = br.open(query).read()
-
-soup = BeautifulSoup(html)
+soup = BeautifulSoup(request.text)
 
 rows = soup.findAll('tr',attrs={'class':'athing'})
 
@@ -28,8 +25,8 @@ document = open('hn.html', 'w')
 document.truncate()
 document.write(doc_start)
 document.write('\n')
-for i in range(0,9):
-	print links[i]
+for i in range(0,10):
+	print (str(links[i]).encode('UTF-8'))
 	document.write(str(links[i]))
 	document.write('<br/>')
 document.write(doc_end)
