@@ -7,15 +7,15 @@ url = "http://news.ycombinator.com"
 
 request = requests.get(url)
 
-soup = BeautifulSoup(request.text)
+soup = BeautifulSoup(request.text, "html.parser")
 
 rows = soup.findAll('tr',attrs={'class':'athing'})
 
-row_soup = BeautifulSoup(str(rows))
+row_soup = BeautifulSoup(str(rows), "html.parser")
 
 titles = row_soup.findAll('td',attrs={'class':'title'})
 
-title_soup = BeautifulSoup(str(titles))
+title_soup = BeautifulSoup(str(titles), "html.parser")
 
 links = title_soup.findAll('a')
 
